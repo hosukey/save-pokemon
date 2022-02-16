@@ -48,7 +48,7 @@ function startCountdown(seconds) {
 
 // disperse zombies and pokemons
 function randomPosition(e) {
-  e.style.left = Math.random() * 800 + 'px';
+  e.style.left = Math.random() * 700 + 'px';
   e.style.bottom = Math.random() * 300 + 'px';
 }
 
