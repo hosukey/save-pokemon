@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif;
+}
+body {
+  // background-color: black;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.game-container {
+  position: relative;
+  .background-image {
+    width: 900px;
+    height: 100%;
+    border-radius: 1rem;
+    display: relative;
+  }
+  .game-top {
+    position: absolute;
+    top: 6rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    .timer {
+      padding: 1rem 2rem;
+      background-color: white;
+      border-radius: 0.4rem;
+      font-weight: 600;
+    }
+    .counter {
+      width: 60px;
+      height: 60px;
+      border: 3px solid white;
+      font-weight: 600;
+      border-radius: 50%;
+      color: white;
+      background-color: rgba(0, 68, 255, 0.7);
+      font-size: 1.3rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1rem auto;
+    }
+  }
+
+  .game-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 300px;
+    height: 200px;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    button {
+      width: 80px;
+      height: 80px;
+      background-color: rgb(255, 123, 0);
+      color: white;
+      font-weight: 600;
+      border-radius: 50%;
+      &:hover {
+        background-color: rgb(29, 206, 53);
+      }
+    }
+    span {
+      margin: 1rem;
+      font-size: 1.4rem;
+      color: white;
+      font-weight: 700;
+    }
+  }
+
+  .game-start {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    button {
+      padding: 2rem 3rem;
+      background-color: ghostwhite;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+      font-size: 0.9rem;
+      border: 6px solid #b6ffb6;
+      &:hover {
+        color: #b6ffb6;
+        background: black;
+      }
+    }
+  }
+
+  .game-items {
+    position: absolute;
+    bottom: 0.4rem;
+    img {
+      cursor: pointer;
+      width: 100px;
+    }
+    .pokemons,
+    .zombies {
+      img {
+        transition: all 0.3s ease-in-out;
+        position: absolute;
+      }
+    }
+
+    .pokemons {
+      img {
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+
+// hiding
+.hide {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
