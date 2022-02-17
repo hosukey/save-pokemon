@@ -8,10 +8,11 @@ body {
   background-color: black;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   &::after {
-    content: "Save Pokemon from zombies! Click Pokemon to rescue them. If you click on zombie 🧟‍♂️, you'll die. You have 10 seconds...!";
+    content: "Save Pokemon from zombies! Click Pokemon to rescue them. If you click on zombie 🧟‍♂️ , you'll die. You have 10 seconds...!";
     position: absolute;
     top: 6rem;
     color: white;
@@ -144,6 +145,11 @@ button {
       }
     }
   }
+}
+
+.footer {
+  color: rgb(218, 255, 238);
+  margin-top: 4rem;
 }
 
 // hiding
