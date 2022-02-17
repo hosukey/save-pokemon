@@ -57,6 +57,8 @@ button {
       background-color: rgba(0, 0, 0, 0.603);
       color: white;
       font-weight: 600;
+      user-select: none;
+      cursor: auto;
     }
     .counter {
       width: 60px;
@@ -67,6 +69,8 @@ button {
       color: white;
       background-color: rgba(0, 68, 255, 0.7);
       font-size: 1.3rem;
+      user-select: none;
+      cursor: auto;
 
       display: flex;
       justify-content: center;

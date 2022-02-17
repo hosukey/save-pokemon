@@ -141,4 +141,5 @@ pokemons.forEach((e) => {
 });
 
 // when browser size change
+browserSize();
 window.addEventListener('resize', browserSize);
