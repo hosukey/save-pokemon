@@ -8,6 +8,10 @@
 
 // ----------------------------------------------
 // Variables
+const POKEMON_COUNT = 10;
+const ZOMBIE_COUNT = 10;
+const GAME_DURATION_SEC = 10;
+
 const browser = document.querySelector('.browserSize');
 const startBtn = document.querySelector('.game-start');
 const gameTimer = document.querySelector('.timer');
@@ -20,9 +24,12 @@ const pokemons = document.querySelectorAll('.pokemons img');
 const zombies = document.querySelectorAll('.zombies img');
 const pokemonContainer = document.querySelector('.pokemons');
 const zombieContainer = document.querySelector('.zombies');
-let gameOver = false;
-let pokemonCounter = 10;
 
+let gameOver = false;
+let score = 0;
+let timer = undefined;
+
+// music
 const musicBG = new Audio('./sound/pokemon-battle.mp3');
 musicBG.loop = true;
 const musicPokemonPull = new Audio('./sound/pokemon_pull.mp3');
@@ -33,18 +40,34 @@ const musicLose = new Audio('./sound/ghetsis.mp3');
 // Functions
 // countdown
 function startCountdown(seconds) {
-  musicBG.play();
-  let counter = seconds;
+  playSound(musicBG);
+  timer = seconds;
   const interval = setInterval(() => {
-    counter--;
-    gameTimer.textContent = `${counter} seconds`;
-    if (counter == 0 || gameOver == true) {
+    timer--;
+    updateTimerText(timer);
+    if (timer == 0 || gameOver == true) {
       clearInterval(interval);
-      musicBG.pause();
+      stopSound(musicBG);
       // show game result when timer reaches 0 second
       gameResult.classList.remove('hidden');
     }
+    if (timer == 0 && gameOver == false) {
+      playSound(musicLose);
+    }
   }, 1000);
+}
+
+// settings
+function playSound(sound) {
+  sound.play();
+}
+
+function stopSound(sound) {
+  sound.pause();
+}
+
+function updateScoreBoard() {
+  gameCounter.innerText = POKEMON_COUNT - score;
 }
 
 // disperse zombies and pokemons
@@ -53,13 +76,20 @@ function randomPosition(e) {
   e.style.bottom = Math.random() * 300 + 'px';
 }
 
+// timer text update
+function updateTimerText(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  gameTimer.innerHTML = `${minutes} : ${seconds}`;
+}
+
 // win or lose text
-function win() {
+function winTextUpdate() {
   winText.classList.remove('hide');
   loseText.classList.add('hide');
 }
 
-function lose() {
+function loseTextUpdate() {
   winText.classList.add('hide');
   loseText.classList.remove('hide');
 }
@@ -81,11 +111,11 @@ function browserSize() {
 startBtn.addEventListener('click', function (e) {
   // hiding start button
   e.target.classList.add('hide');
-  // start counter 10 seconds
-  startCountdown(10);
+  startCountdown(GAME_DURATION_SEC);
   // show zombies and pokemons on the screen
   pokemonContainer.classList.remove('hide');
   zombieContainer.classList.remove('hide');
+  // place pokemon and zombies on the screen
   pokemons.forEach((e) => {
     randomPosition(e);
   });
@@ -97,15 +127,16 @@ startBtn.addEventListener('click', function (e) {
 // replay game
 replayBtn.addEventListener('click', function (e) {
   gameOver = false;
-  lose();
+  loseTextUpdate();
+  // bring all pokemons back to the screen
   pokemons.forEach((e) => {
     if (e.classList.contains('hide')) {
       e.classList.remove('hide');
     }
   });
-  pokemonCounter = 10;
-  gameCounter.textContent = `${pokemonCounter}`;
-
+  // initiate game
+  score = 0;
+  updateScoreBoard();
   gameResult.classList.add('hidden');
   startCountdown(10);
   pokemons.forEach((e) => {
@@ -120,22 +151,22 @@ replayBtn.addEventListener('click', function (e) {
 zombies.forEach((e) => {
   e.addEventListener('click', function (e) {
     gameOver = true;
-    lose();
-    musicLose.play();
+    loseTextUpdate();
+    playSound(musicLose);
   });
 });
 
-// click pokemons to win
+// click pokemons (to win)
 pokemons.forEach((e) => {
   e.addEventListener('click', function (e) {
-    musicPokemonPull.play();
+    playSound(musicPokemonPull);
     e.target.classList.add('hide');
-    pokemonCounter--;
-    gameCounter.textContent = `${pokemonCounter}`;
-    if (pokemonCounter === 0) {
+    score++;
+    updateScoreBoard();
+    if (POKEMON_COUNT === score) {
       gameOver = true;
-      musicWin.play();
-      win();
+      playSound(musicWin);
+      winTextUpdate();
     }
   });
 });
