@@ -68,7 +68,7 @@ function lose() {
 function browserSize() {
   let width = window.innerWidth;
   let height = window.innerHeight;
-  if (width < 850 || height < 1005) {
+  if (width < 810 || height < 700) {
     browser.classList.remove('hide');
   } else {
     browser.classList.add('hide');

@@ -3,8 +3,8 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'DM Sans', sans-serif;
-  overflow: hidden;
 }
+
 body {
   background-color: black;
   height: 100vh;
@@ -12,15 +12,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  &::after {
-    content: "Save Pokemon from zombies! Click Pokemon to rescue them. If you click on zombie 🧟‍♂️ , you'll die. You have 10 seconds...!";
-    position: absolute;
-    top: 6rem;
-    color: white;
-    font-size: 1.8rem;
-    width: 700px;
-    overflow: hidden;
-  }
+  overflow: hidden;
 }
 
 button {
@@ -29,7 +21,19 @@ button {
   cursor: pointer;
 }
 
+.instruction {
+  width: 800px;
+  &::after {
+    content: "Save Pokemon from zombies! Click Pokemon to rescue them. If you click on zombie 🧟‍♂️ , you'll die. You have 10 seconds...!";
+    position: relative;
+    top: -2rem;
+    color: white;
+    font-size: 1.6rem;
+  }
+}
+
 .game-container {
+  overflow: hidden;
   position: relative;
   .background-image {
     width: 800px;
@@ -150,13 +154,15 @@ button {
 }
 
 .footer {
+  position: absolute;
+  bottom: 3rem;
   color: rgb(218, 255, 238);
-  margin-top: 4rem;
 }
 
 .browserSize {
   width: 100%;
   height: 100%;
+  text-align: center;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -174,7 +180,7 @@ button {
   p {
     margin-top: 2rem;
     color: white;
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 }
 
