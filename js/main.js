@@ -8,6 +8,7 @@
 
 // ----------------------------------------------
 // Variables
+const browser = document.querySelector('.browserSize');
 const startBtn = document.querySelector('.game-start');
 const gameTimer = document.querySelector('.timer');
 const gameCounter = document.querySelector('.counter');
@@ -61,6 +62,17 @@ function win() {
 function lose() {
   winText.classList.add('hide');
   loseText.classList.remove('hide');
+}
+
+// browser size
+function browserSize() {
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  if (width < 850 || height < 1005) {
+    browser.classList.remove('hide');
+  } else {
+    browser.classList.add('hide');
+  }
 }
 
 // ----------------------------------------------
@@ -127,3 +139,6 @@ pokemons.forEach((e) => {
     }
   });
 });
+
+// when browser size change
+window.addEventListener('resize', browserSize);
